@@ -1,0 +1,15 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Список</title>
+</head>
+<body>
+    <div>Список студентов</div>
+        {{#students}}
+            <div>
+           <b>{{id}}</b>
+           <span>{{firstName}}</span>
+           <b>{{phoneNumber}}</b>
+            </div>
+            {{/students}}
+</body>
+</html>
