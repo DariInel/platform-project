@@ -1,2 +1,4 @@
-package com.example.platformproject.repository;public interface LoginRepository {
+package com.example.platformproject.repository;
+
+public interface LoginRepository {
 }
