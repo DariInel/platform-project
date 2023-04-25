@@ -1,28 +1,31 @@
 package com.example.platformproject.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.sql.Date;
 
 @Entity
 @Setter
 @Getter
-public class Student {
+
+public class Example {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long id;
+    private Integer id;
 
     private String firstName;
     private String secondName;
-    private String patronymic;
-    private Integer age;
-    private Date birthDate;
-    private Integer groupId;
-    private  String fullAddress;
-    private Boolean isWorked;
+    public Example(){
+
+    }
+    public Example(String firstName, String secondName){
+        this.firstName = firstName;
+        this.secondName = secondName;
+    }
 }
