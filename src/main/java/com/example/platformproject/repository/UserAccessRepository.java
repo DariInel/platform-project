@@ -4,5 +4,6 @@ import com.example.platformproject.domain.UserAccess;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserAccessRepository extends JpaRepository<UserAccess, Long> {
-    UserAccess findByLogin(String login);
+    UserAccess findUserAccessByUsername(String username);
+
 }

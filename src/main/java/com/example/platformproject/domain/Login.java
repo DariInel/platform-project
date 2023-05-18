@@ -11,8 +11,7 @@ import javax.persistence.*;
 @Table(name = "login")
 public class Login {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "hibernate_sequence")
-    @SequenceGenerator(name = "hibernate_sequence", sequenceName = "hibernate_sequence", allocationSize = 10)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String email;

@@ -1,8 +1,10 @@
 package com.example.platformproject.repository;
 
 import com.example.platformproject.domain.Student;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface StudentRepository extends CrudRepository<Student, Integer> {
+import java.util.List;
 
+public interface StudentRepository extends JpaRepository<Student, Long> {
+    Student findStudentById(Long id);
 }

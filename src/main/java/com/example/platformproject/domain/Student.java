@@ -1,28 +1,35 @@
 package com.example.platformproject.domain;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
 @Setter
 @Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "student")
 public class Student {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
 
-    private String firstName;
-    private String secondName;
+    private String first_name;
+    private String second_name;
     private String patronymic;
     private Integer age;
-    private Date birthDate;
-    private Integer groupId;
-    private  String fullAddress;
-    private Boolean isWorked;
+    private Date birth_date;
+    private Integer group_id;
+    private  String full_address;
+    private Long point;
+
+    @ManyToOne()
+    @JoinColumn(name = "course_id")
+    private Course course;
+
+    @OneToOne(mappedBy = "student")
+    private UserAccess userAccess;
 }

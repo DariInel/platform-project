@@ -1,11 +1,24 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<html xmlns:th="https://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6" lang="ru">
 <head>
-  <title>Hello World!</title>
+  <title>Профиль</title>
 </head>
 <body>
-<h1 th:inline="text">Hello <span th:remove="tag" sec:authentication="name">thymeleaf</span>!</h1>
+<p th:text="'Вулфкоинов: ' + ${point}"></p>
+<div th:each="el : ${student}">
+    <p th:text="${el.second_name}"><strong></strong></p>
+    <p th:text="${el.first_name}"><strong></strong></p>
+    <p th:text="${el.patronymic}"><strong></strong></p>
+    <p th:text="'День рождения: ' + ${el.birth_date} + '( ' + ${el.age} + ' )'"></p>
+    <p th:text="'Номер группы: №' + ${el.group_id}"></p>
+</div>
+<div th:each="c : ${course}">
+    <p><strong>Ваш курс</strong></p>
+    <p th:text="${c.course_name}"></p>
+    <p th:text="${c.short_description}"></p>
+</div>
+<!--<h1 th:inline="text">Hello <span th:remove="tag" sec:authentication="name">thymeleaf</span>!</h1>-->
 <form th:action="@{/logout}" method="post">
   <input type="submit" value="Sign Out"/>
 </form>

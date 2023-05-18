@@ -1,20 +1,10 @@
-package com.example.platformproject.web.controller;
+package com.example.platformproject.web.controller.V1;
 
-import com.example.platformproject.domain.Example;
-import com.example.platformproject.repository.ExampleRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.Map;
 
 @Controller
 public class GreetingController {
-
+/*
     @Autowired
     private ExampleRepository exampleRepository;
 
@@ -42,7 +32,7 @@ public class GreetingController {
         return "main";
     }
 
-/*    @GetMapping(path="/all")
+    @GetMapping(path="/all")
     public @ResponseBody Iterable<Example> getAllUsers() {
         // This returns a JSON or XML with the users
         return exampleRepository.findAll();
