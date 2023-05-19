@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная</title>
+</head>
+<body>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
+<div>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Фамилия Имя Отчество</th>
+            <th>Группа</th>
+        </tr>
+        <tr th:each="el : ${students}">
+            <td th:text="${el.id}"></td>
+            <td th:text="${el.second_name} + ' ' + ${el.first_name} + ' ' + ${el.patronymic}"></td>
+            <td th:text="${el.group_id}"></td>
+            <td>
+                <form th:action="@{/admin/v1/student/{id_student}(id_student=${el.id})}" method="get">
+                    <button>Изменить данные</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

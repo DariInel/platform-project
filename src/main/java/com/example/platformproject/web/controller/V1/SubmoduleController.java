@@ -1,7 +1,8 @@
 package com.example.platformproject.web.controller.V1;
 
 import com.example.platformproject.domain.Module;
-import com.example.platformproject.service.ModuleService;
+import com.example.platformproject.domain.Submodule;
+import com.example.platformproject.service.LessonService;
 import com.example.platformproject.service.SubmoduleService;
 import com.example.platformproject.web.annotation.ApiV1;
 import lombok.RequiredArgsConstructor;
@@ -15,18 +16,18 @@ import org.springframework.web.servlet.ModelAndView;
 @ApiV1
 @RequiredArgsConstructor
 @Controller
-public class ModuleController {
+public class SubmoduleController {
     @Autowired
-    private ModuleService moduleService;
+    private LessonService lessonService;
     @Autowired
     private SubmoduleService submoduleService;
 
-    @GetMapping("/module/{moduleName}")
-    public ModelAndView getSubmodules(@PathVariable String moduleName, Model model) {
-        Module module = moduleService.findModule(moduleName);
-        model.addAttribute("name", moduleName);
-        model.addAttribute("module", module);
-        model.addAttribute("submodules", submoduleService.findSubmodules(module.getId()));
-        return new ModelAndView("module");
+    @GetMapping("/submodule/{submoduleName}")
+    public ModelAndView getLessons(@PathVariable String submoduleName, Model model) {
+        Submodule submodule = submoduleService.findSubmodule(submoduleName);
+        model.addAttribute("name", submoduleName);
+        model.addAttribute("submodule", submodule);
+        model.addAttribute("lessons", lessonService.findLessons(submodule.getId()));
+        return new ModelAndView("submodule");
     }
 }

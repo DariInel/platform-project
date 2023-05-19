@@ -8,9 +8,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Getter
@@ -42,7 +40,14 @@ public class UserAccess implements UserDetails, CredentialsContainer {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        if(Objects.equals(role, "USER"))
+            return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        else
+            return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"));
+      //  List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+      //  authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+     //   authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+      //  return role;
     }
 
     @Override

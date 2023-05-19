@@ -8,4 +8,5 @@ import java.util.List;
 public interface ModuleRepository extends JpaRepository<Module, Long> {
 
     List <Module> findAllByCourseId(Long course_id);
+    Module findModuleByName(String name);
 }

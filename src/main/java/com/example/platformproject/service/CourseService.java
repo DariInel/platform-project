@@ -19,9 +19,7 @@ public class CourseService {
     public Course findCourse(Long id){
         return courseRepository.findCourseById(id);
     }
-
- /*   public Long findCourseId(String name){
-        return courseRepository.findCourseByCourse_name(name).getId();
+    public Course findCourseByName(String name){
+        return courseRepository.findCourseByCoursename(name);
     }
-  */
 }

@@ -18,7 +18,7 @@ public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String course_name;
+    private String coursename;
     private String short_description;
 
     @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)

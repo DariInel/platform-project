@@ -21,11 +21,9 @@ public class Lesson {
     private int number;
     private String name;
     private String description;
+    private String text;
 
     @ManyToOne()
     @JoinColumn(name = "submodele_id")
     private Submodule submodule;
-
-    @OneToMany(mappedBy = "lesson", fetch = FetchType.LAZY)
-    private List<LessonAbstract> lessonAbstracts = new LinkedList<>();
 }

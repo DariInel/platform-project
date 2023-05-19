@@ -8,6 +8,8 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
@@ -17,5 +19,12 @@ public class StudentService {
 
     public Student findStudentById(Long studentId){
         return studentRepository.findStudentById(studentId);
+    }
+    public List<Student> getStudents(){
+        return studentRepository.findAll();
+    }
+
+    public Student getStudent(Long id){
+        return studentRepository.findStudentById(id);
     }
 }

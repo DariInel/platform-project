@@ -31,26 +31,10 @@ public class MainPageController {
            String username = ((UserAccess) principal).getUsername();
            Student student = userAccessService.findStudentByUsername(username);
            model.addAttribute("point", student.getPoint());
+           model.addAttribute("nameCourse", student.getCourse().getCoursename());
            model.addAttribute("student", student);
            model.addAttribute("course", student.getCourse());
         }
         return new ModelAndView("main_page");
     }
-
-
-/*
-    @PostMapping ("/home")
-    public String MainPage(@RequestParam(name="username", required=true) String username, Model model) {
-      //  UserAccess user = (UserAccess) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-      //  String username = user.getUsername();
-      //  System.out.println(username);
-        Student student = studentService.findStudentById(userAccessService.findIdByUsername(username));
-        model.addAttribute("age", student.getAge());
-        model.addAttribute("id", student.getId());
-        model.addAttribute("name", username);
-
-        model.addAttribute("student", student);
-        return "main_page";
-    }
- */
 }

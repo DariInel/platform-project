@@ -2,7 +2,8 @@
 <html xmlns:th="https://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6" lang="ru">
 <head>
-  <title>Профиль</title>
+    <link rel="stylesheet" th:href="@{../static/css/main.css}"/>
+    <title>Профиль</title>
 </head>
 <body>
 <p th:text="'Вулфкоинов: ' + ${point}"></p>
@@ -13,9 +14,9 @@
     <p th:text="'День рождения: ' + ${el.birth_date} + '( ' + ${el.age} + ' )'"></p>
     <p th:text="'Номер группы: №' + ${el.group_id}"></p>
 </div>
-<div th:each="c : ${course}">
+<div class="element" th:each="c : ${course}">
     <p><strong>Ваш курс</strong></p>
-    <p th:text="${c.course_name}"></p>
+    <a th:text="${c.coursename}" th:href="@{/api/v1/course/{courseName}(courseName=${nameCourse})}"></a>
     <p th:text="${c.short_description}"></p>
 </div>
 <!--<h1 th:inline="text">Hello <span th:remove="tag" sec:authentication="name">thymeleaf</span>!</h1>-->

@@ -1,7 +1,7 @@
 package com.example.platformproject.service;
 
-import com.example.platformproject.domain.Module;
-import com.example.platformproject.repository.ModuleRepository;
+import com.example.platformproject.domain.Lesson;
+import com.example.platformproject.repository.LessonRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -13,15 +13,15 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
-public class ModuleService {
+public class LessonService {
 
     @Autowired
-    ModuleRepository moduleRepository;
+    LessonRepository lessonRepository;
 
-    public List<Module> findModules(Long courseId){
-        return moduleRepository.findAllByCourseId(courseId);
+    public List<Lesson> findLessons(Long submoduleId){
+        return lessonRepository.findAllBySubmoduleId(submoduleId);
     }
-    public Module findModule(String name){
-        return moduleRepository.findModuleByName(name);
+    public Lesson findLesson(String name){
+        return lessonRepository.findLessonByName(name);
     }
 }
