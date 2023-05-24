@@ -7,15 +7,15 @@
 </head>
 <body>
 <div>Пожалуйста, укажите данные студента</div>
-  <form th:action="@{/admin/v1/student/add}" method="post">
-    <div><label> Фамилия : <input type="text" name="second_name"/> </label></div>
-    <div><label> Имя : <input type="text" name="first_name"/> </label></div>
-    <div><label> Отчество : <input type="text" name="patronymic"/> </label></div>
-    <div><label> Дата рождения : <input type="date" name="birth_date"/> </label></div>
-    <div><label> Возраст : <input type="text" name="age"/> </label></div>
-    <div><label> Адрес : <input type="text" name="full_address"/> </label></div>
-    <div><label> Группа : <input type="text" name="group_id"/> </label></div>
-    <div><label> Курс : <input type="text" name="course_id"/> </label></div>
+  <form th:action="@{/admin/v1/student/add}" th:object="${student}" method="post">
+    <div><label> Фамилия : <input type="text" th:field="*{second_name}"/> </label></div>
+    <div><label> Имя : <input type="text" th:field="*{first_name}"/> </label></div>
+    <div><label> Отчество : <input type="text" th:field="*{patronymic}"/> </label></div>
+    <div><label> Дата рождения : <input type="date" th:field="*{birth_date}"/> </label></div>
+    <div><label> Возраст : <input type="number" th:field="*{age}"/> </label></div>
+    <div><label> Адрес : <input type="text" th:field="*{full_address}"/> </label></div>
+    <div><label> Группа : <input type="number" th:field="*{group_id}"/> </label></div>
+    <div><label> Курс : <input type="number" th:field="*{course_id}"/> </label></div>
     <button type="submit">Добавить студента</button>
   </form>
 </body>

@@ -2,11 +2,15 @@ package com.example.platformproject.service;
 
 import com.example.platformproject.domain.Course;
 import com.example.platformproject.domain.Student;
+import com.example.platformproject.domain.dto.request.ChangeAddress;
+import com.example.platformproject.domain.dto.request.StudentRequest;
+import com.example.platformproject.event.ChangeAddressEvent;
 import com.example.platformproject.repository.StudentRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,12 +26,22 @@ public class StudentService {
     @Autowired
     CourseService courseService;
 
+    @Autowired
+    private ApplicationEventPublisher applicationEventPublisher;
+
     public List<Student> getStudents(){
         return studentRepository.findAll();
     }
 
     public Student getStudent(Long id){
         return studentRepository.findStudentById(id);
+    }
+    public void updateAddressStudent(ChangeAddress data){
+        Student student = studentRepository.findStudentById(data.getId_student());
+        student.setFull_address(data.getNew_address());
+        studentRepository.save(student);
+        ChangeAddressEvent event = new ChangeAddressEvent(this, data);
+        applicationEventPublisher.publishEvent(event);
     }
 
     public void updateParameterStudent(Long id, String param, String new_value){
@@ -50,8 +64,26 @@ public class StudentService {
             studentRepository.save(student);
         }
     }
-    public void addStudent(Student student){
-        studentRepository.save(student);
+    public void addStudent(StudentRequest student){
+        Student newStudent = new Student();
+        Long id;
+        while (true){
+            id = Double.valueOf(Math.random()*1000).longValue();
+            if(getStudent(id) == null)
+                break;
+        }
+        newStudent.setId(id);
+        newStudent.setAge(student.getAge());
+        newStudent.setBirth_date(student.getBirth_date());
+        newStudent.setFirst_name(student.getFirst_name());
+        newStudent.setFull_address(student.getFull_address());
+        newStudent.setGroup_id(student.getGroup_id());
+        newStudent.setPatronymic(student.getPatronymic());
+        newStudent.setSecond_name(student.getSecond_name());
+        newStudent.setPoint(0L);
+        newStudent.setCourse(courseService.findCourse(student.getCourse_id()));
+
+        studentRepository.save(newStudent);
     }
 
 }
