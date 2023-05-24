@@ -12,18 +12,38 @@
   <p th:text="'Отчество : ' + ${student.patronymic}"></p>
   <p th:text="'Дата рождения : ' + ${student.birth_date}"></p>
   <p th:text="'Возраст : ' + ${student.age}"></p>
-  <form th:action="@{/admin/v1/student/change}" method="post">
+  <form th:action="@{/admin/v1/student/{id_student}(id_student=${student.id})}" method="post">
     <p th:text="'Группа : ' + ${student.group_id}"></p>
-    <input type="text" name="new_value" placeholder="Укажите новое значение">
-    <input type="hidden" name="id" value="${student.id}"/>
-    <input type="hidden" name="param" value="group"/>
+    <label>
+      <input type="text" name="new_value" placeholder="Укажите новую группу">
+    </label>
+    <input type="hidden" name="param" value="group_id"/>
     <button type="submit">Изменить</button>
   </form>
-
-  <p th:text="${el.first_name}"><strong></strong></p>
-  <p th:text="${el.patronymic}"><strong></strong></p>
-  <p th:text="'День рождения: ' + ${el.birth_date} + '( ' + ${el.age} + ' )'"></p>
-  <p th:text="'Номер группы: №' + ${el.group_id}"></p>
+  <form th:action="@{/admin/v1/student/{id_student}(id_student=${student.id})}" method="post">
+    <p th:text="'Адрес : ' + ${student.full_address}"></p>
+    <label>
+      <input type="text" name="new_value" placeholder="Укажите новый адрес">
+    </label>
+    <input type="hidden" name="param" value="full_address"/>
+    <button type="submit">Изменить</button>
+  </form>
+  <form th:action="@{/admin/v1/student/{id_student}(id_student=${student.id})}" method="post">
+    <p th:text="'Вулфкоинов : ' + ${student.point}"></p>
+    <label>
+      <input type="text" name="new_value" placeholder="Укажите новое количество баллов">
+    </label>
+    <input type="hidden" name="param" value="point"/>
+    <button type="submit">Изменить</button>
+  </form>
+  <form th:action="@{/admin/v1/student/{id_student}(id_student=${student.id})}" method="post">
+    <p th:text="'Курс №  : ' + ${student.course.getId()} + ' (' + ${student.course.getCoursename()} + ')'"></p>
+    <label>
+      <input type="text" name="new_value" placeholder="Укажите новый номер курса">
+    </label>
+    <input type="hidden" name="param" value="course_id"/>
+    <button type="submit">Изменить</button>
+  </form>
 </div>
 </body>
 </html>

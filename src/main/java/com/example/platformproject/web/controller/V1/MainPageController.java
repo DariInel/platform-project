@@ -2,7 +2,6 @@ package com.example.platformproject.web.controller.V1;
 
 import com.example.platformproject.domain.Student;
 import com.example.platformproject.domain.UserAccess;
-import com.example.platformproject.service.CourseService;
 import com.example.platformproject.service.StudentService;
 import com.example.platformproject.service.UserAccessService;
 import com.example.platformproject.web.annotation.ApiV1;
