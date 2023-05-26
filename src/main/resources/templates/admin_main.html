@@ -2,14 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/css/main.css"/>
     <title>Главная</title>
 </head>
 <body>
 <form th:action="@{/logout}" method="post">
-    <input type="submit" value="Sign Out"/>
+    <button class="custom-btn btn-3" type="submit" value="Sign Out"><span>Выйти</span></button>
 </form>
 <form th:action="@{/admin/v1/student/add}" method="get">
-    <button>Добавить студента</button>
+    <button class="custom-btn btn-3" type="submit"><span>Добавить студента</span></button>
 </form>
 <div>
     <table border="1">

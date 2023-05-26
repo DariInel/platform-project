@@ -5,6 +5,7 @@ import com.example.platformproject.domain.dto.request.StudentRequest;
 import com.example.platformproject.service.ChangeService;
 import com.example.platformproject.service.CourseService;
 import com.example.platformproject.service.StudentService;
+import com.example.platformproject.util.CustomResponse;
 import com.example.platformproject.web.annotation.AdminApiV1;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +53,15 @@ public class AdminMainController {
     @PostMapping("/student/{id_student}")
     public ModelAndView changeParam(Model model, @PathVariable @NotBlank String id_student,
                                      @RequestParam(required = true, defaultValue = "" ) @NotBlank String param, @ModelAttribute("new_value") @NotBlank String new_value) {
-        studentService.updateParameterStudent(Long.parseLong(id_student), param, new_value);
+        CustomResponse response = studentService.updateParameterStudent(Long.parseLong(id_student), param, new_value);
+        if(response.getCode() == 1){
+            String error = "Студент не найден";
+            model.addAttribute("error", error);
+        }
+        if(response.getCode() == 2){
+            String error = "Что-то пошло не так :(";
+            model.addAttribute("error", error);
+        }
         return getStudent(model, id_student);
 
     }
@@ -61,9 +70,13 @@ public class AdminMainController {
         model.addAttribute("student", request);
         return new ModelAndView("add_student");
     }
-      @PostMapping(value = "/student/add")
+    @PostMapping(value = "/student/add")
     public ModelAndView add(Model model, @Valid StudentRequest student) {
-        studentService.addStudent(student);
+        CustomResponse response = studentService.addStudent(student);
+          if(response.getCode() == 2){
+              String error = "Что-то пошло не так :(";
+              model.addAttribute("error", error);
+          }
         return getListStudent(model);
     }
 

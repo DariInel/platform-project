@@ -14,7 +14,7 @@ import java.sql.Date;
 @Table(name = "change")
 public class Change {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     private Long id_student;

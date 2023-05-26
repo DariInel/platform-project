@@ -30,7 +30,7 @@ public class WebSecurityConfig{
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .antMatchers("/hello", "/css/main.css").permitAll()
+                        .antMatchers("/hello", "/css/main.css", "/actuator").permitAll()
                         .antMatchers("/api/**")
                         .hasAnyRole("ADMIN", "USER")
                         .antMatchers("/admin/**")

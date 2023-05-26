@@ -5,6 +5,7 @@ import com.example.platformproject.domain.UserAccess;
 import com.example.platformproject.domain.dto.request.ChangeAddress;
 import com.example.platformproject.service.StudentService;
 import com.example.platformproject.service.UserAccessService;
+import com.example.platformproject.util.CustomResponse;
 import com.example.platformproject.web.annotation.ApiV1;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +50,15 @@ public class MainPageController {
         data.setOld_address(studentService.getStudent(Long.parseLong(id)).getFull_address());
         data.setNew_address(new_value);
         data.setDate(Date.valueOf(LocalDate.now()));
-        studentService.updateAddressStudent(data);
+        CustomResponse response = studentService.updateAddressStudent(data);
+        if(response.getCode() == 1) {
+            String error = "Такого ученика нет";
+            model.addAttribute("error", error);
+        }
+        if(response.getCode() == 2) {
+            String error = "Что-то пошло не так, попробуйте снова :(";
+            model.addAttribute("error", error);
+        }
         return MainPage(model);
     }
 }

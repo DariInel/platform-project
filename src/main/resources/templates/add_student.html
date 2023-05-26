@@ -2,10 +2,13 @@
 <html xmlns:th="https://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6" lang="ru">
 <head>
-  <link rel="stylesheet" th:href="@{../static/css/main.css}"/>
+  <link rel="stylesheet" href="../static/css/main.css"/>
   <title>Добавить студента</title>
 </head>
 <body>
+<div th:if="${error}">
+  <p th:text="${error}"></p>
+</div>
 <div>Пожалуйста, укажите данные студента</div>
   <form th:action="@{/admin/v1/student/add}" th:object="${student}" method="post">
     <div><label> Фамилия : <input type="text" th:field="*{second_name}"/> </label></div>
@@ -16,7 +19,7 @@
     <div><label> Адрес : <input type="text" th:field="*{full_address}"/> </label></div>
     <div><label> Группа : <input type="number" th:field="*{group_id}"/> </label></div>
     <div><label> Курс : <input type="number" th:field="*{course_id}"/> </label></div>
-    <button type="submit">Добавить студента</button>
+    <button type="submit" class="custom-btn btn-3" ><span>Добавить студента</span></button>
   </form>
 </body>
 </html>

@@ -2,23 +2,26 @@
 <html xmlns:th="https://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6" lang="ru">
 <head>
-    <link rel="stylesheet" th:href="@{../static/css/main.css}"/>
+    <link rel="stylesheet" href="../static/css/main.css"/>
     <title>Профиль</title>
 </head>
 <body>
 <p th:text="'Вулфкоинов: ' + ${point}"></p>
-<div th:each="el : ${student}">
+<div th:class="element" th:each="el : ${student}">
     <p th:text="${el.second_name}"><strong></strong></p>
     <p th:text="${el.first_name}"><strong></strong></p>
     <p th:text="${el.patronymic}"><strong></strong></p>
     <p th:text="'День рождения: ' + ${el.birth_date} + '( ' + ${el.age} + ' )'"></p>
     <p th:text="'Номер группы: №' + ${el.group_id}"></p>
+    <div th:if="${error}">
+        <p th:text="${error}"></p>
+    </div>
     <form th:action="@{/api/v1/home/{id}(id=${el.id})}" method="post">
         <p th:text="'Адрес : ' + ${student.full_address}"></p>
         <label>
             <input type="text" name="new_value" placeholder="Укажите новый адрес">
         </label>
-        <button type="submit">Изменить адрес</button>
+        <button class="custom-btn btn-3" type="submit"><span>Изменить адрес</span></button>
     </form>
 </div>
 <div class="element" th:each="c : ${course}">
@@ -26,9 +29,8 @@
     <a th:text="${c.coursename}" th:href="@{/api/v1/course/{courseName}(courseName=${nameCourse})}"></a>
     <p th:text="${c.short_description}"></p>
 </div>
-<!--<h1 th:inline="text">Hello <span th:remove="tag" sec:authentication="name">thymeleaf</span>!</h1>-->
 <form th:action="@{/logout}" method="post">
-  <input type="submit" value="Sign Out"/>
+    <button class="custom-btn btn-3" type="submit" value="Sign Out"><span>Выйти</span></button>
 </form>
 </body>
 </html>
