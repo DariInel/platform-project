@@ -2,7 +2,6 @@
 <html xmlns:th="https://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6" lang="ru">
 <head>
-  <link rel="stylesheet" href="../static/css/main.css"/>
   <title>Профиль</title>
 </head>
 <body>
@@ -10,7 +9,7 @@
   <p th:text="'Фамилия : ' + ${student.second_name}"></p>
   <p th:text="'Имя : ' + ${student.first_name}"></p>
   <p th:text="'Отчество : ' + ${student.patronymic}"></p>
-  <p th:text="'Дата рождения : ' + ${student.birth_date}"></p>
+  <p th:text="'Дата рождения : ' + ${student.birthdate}"></p>
   <p th:text="'Возраст : ' + ${student.age}"></p>
   <form th:action="@{/admin/v1/student/{id_student}(id_student=${student.id})}" method="post">
     <p th:text="'Группа : ' + ${student.group_id}"></p>
@@ -37,7 +36,7 @@
     <button type="submit">Изменить</button>
   </form>
   <form th:action="@{/admin/v1/student/{id_student}(id_student=${student.id})}" method="post">
-    <p th:text="'Курс №  : ' + ${student.course.getId()} + ' (' + ${student.course.getCoursename()} + ')'"></p>
+    <p th:text="'Курс №  : ' + ${numberCourse} + ' (' + ${nameCourse} + ')'"></p>
     <label>
       <input type="text" name="new_value" placeholder="Укажите новый номер курса">
     </label>

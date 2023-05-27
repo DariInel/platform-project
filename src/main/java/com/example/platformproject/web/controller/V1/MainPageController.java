@@ -47,8 +47,9 @@ public class MainPageController {
     public ModelAndView Change(Model model, @PathVariable @NotNull String id, @ModelAttribute("new_value") @NotBlank String new_value) {
         ChangeAddress data = new ChangeAddress();
         data.setId_student(Long.parseLong(id));
-        data.setOld_address(studentService.getStudent(Long.parseLong(id)).getFull_address());
-        data.setNew_address(new_value);
+        String message = "Ученик с id " + id + " изменил адрес с " + studentService.getStudent(Long.parseLong(id)).getFull_address() + " на " + new_value;
+        data.setMessage(message);
+        data.setNew_value(new_value);
         data.setDate(Date.valueOf(LocalDate.now()));
         CustomResponse response = studentService.updateAddressStudent(data);
         if(response.getCode() == 1) {

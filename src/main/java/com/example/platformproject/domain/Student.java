@@ -21,7 +21,7 @@ public class Student {
     private String second_name;
     private String patronymic;
     private Integer age;
-    private Date birth_date;
+    private Date birthdate;
     private Integer group_id;
     private  String full_address;
     private Long point;

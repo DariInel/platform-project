@@ -14,8 +14,11 @@ import lombok.experimental.FieldDefaults;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
@@ -31,6 +34,9 @@ public class StudentService {
     CourseService courseService;
 
     @Autowired
+    NotificationService notificationService;
+
+    @Autowired
     private ApplicationEventPublisher applicationEventPublisher;
 
     public List<Student> getStudents(){
@@ -42,7 +48,7 @@ public class StudentService {
     }
     public CustomResponse updateAddressStudent(ChangeAddress data){
         Student student = studentRepository.findStudentById(data.getId_student());
-        student.setFull_address(data.getNew_address());
+        student.setFull_address(data.getNew_value());
         studentRepository.save(student);
         ChangeAddressEvent event = new ChangeAddressEvent(this, data);
         applicationEventPublisher.publishEvent(event);
@@ -74,7 +80,7 @@ public class StudentService {
     public CustomResponse addStudent(StudentRequest student){
         Student newStudent = new Student();
         newStudent.setAge(student.getAge());
-        newStudent.setBirth_date(student.getBirth_date());
+        newStudent.setBirthdate(student.getBirth_date());
         newStudent.setFirst_name(student.getFirst_name());
         newStudent.setFull_address(student.getFull_address());
         newStudent.setGroup_id(student.getGroup_id());
@@ -86,6 +92,17 @@ public class StudentService {
         studentRepository.save(newStudent);
         log.info("Добавлен студент");
         return new CustomResponse<>(null, CustomStatus.SUCCESS);
+    }
+
+    @Scheduled(cron = "${interval-in-cron}")
+    public void getBirthdays(){
+        Date current_date = Date.valueOf(LocalDate.now().plusDays(2));
+        List<Student> birthday_people = studentRepository.findAll();
+        for(Student st: birthday_people){
+            Date birth_date = st.getBirthdate();
+            if(birth_date.getDay() == current_date.getDay() && birth_date.getMonth() == current_date.getMonth())
+                notificationService.addBirthDayNotification(st);
+        }
     }
 
 }

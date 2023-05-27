@@ -18,11 +18,13 @@
         <tr>
             <th>ID</th>
             <th>Сообщение</th>
+            <th>Дата</th>
             <th>Прочитано?</th>
         </tr>
-        <tr th:each="ch: ${changes}">
+        <tr th:each="ch: ${notifications}">
             <td th:text="${ch.id}"></td>
-            <td th:text="'Студент с id ' + ${ch.id_student} + ' изменил адрес с ' +  ${ch.old_value} + ' на ' + ${ch.new_value} + ' ( ' + ${ch.date} + ' )'"></td>
+            <td th:text="${ch.message}"></td>
+            <td th:text="${ch.date}"></td>
             <td>
                 <form th:action="@{/admin/v1/change/{id}(id=${ch.id})}" method="post">
                     <button>Прочитано</button>

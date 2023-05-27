@@ -13,7 +13,7 @@ public class Pointcuts {
 
     }
 
-    @Pointcut("execution(* com.example.platformproject.service.ChangeService.addChange())")
+    @Pointcut("execution(* com.example.platformproject.service.NotificationService.addChange())")
     public void addMethodChange(){
 
     }

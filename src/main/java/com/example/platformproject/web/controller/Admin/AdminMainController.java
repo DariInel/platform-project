@@ -2,8 +2,7 @@ package com.example.platformproject.web.controller.Admin;
 
 import com.example.platformproject.domain.Student;
 import com.example.platformproject.domain.dto.request.StudentRequest;
-import com.example.platformproject.service.ChangeService;
-import com.example.platformproject.service.CourseService;
+import com.example.platformproject.service.NotificationService;
 import com.example.platformproject.service.StudentService;
 import com.example.platformproject.util.CustomResponse;
 import com.example.platformproject.web.annotation.AdminApiV1;
@@ -17,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @AdminApiV1
@@ -29,12 +27,12 @@ public class AdminMainController {
     private StudentService studentService;
 
     @Autowired
-    private ChangeService changeService;
+    private NotificationService notificationService;
 
     @GetMapping("/main")
     public ModelAndView getListStudent(Model model) {
         List<Student> students = studentService.getStudents();
-        model.addAttribute("changes", changeService.findChangesForView());
+        model.addAttribute("notifications", notificationService.findNotificationsForView());
         model.addAttribute("students", students);
         return new ModelAndView("admin_main");
     }
@@ -42,11 +40,13 @@ public class AdminMainController {
     public ModelAndView getStudent(Model model, @PathVariable @NotBlank String id_student) {
         Student student = studentService.getStudent(Long.parseLong(id_student));
         model.addAttribute("student", student);
+        model.addAttribute("numberCourse", student.getCourse().getId());
+        model.addAttribute("nameCourse", student.getCourse().getCoursename());
         return new ModelAndView("change_student");
     }
     @PostMapping("/change/{id}")
     public ModelAndView deleteChange(Model model, @PathVariable @NotBlank String id){
-        changeService.updateChange(Long.parseLong(id));
+        notificationService.updateNotification(Long.parseLong(id));
         return getListStudent(model);
     }
 

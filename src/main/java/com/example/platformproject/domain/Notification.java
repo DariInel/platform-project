@@ -11,15 +11,14 @@ import java.sql.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "change")
-public class Change {
+@Table(name = "notification")
+public class Notification {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     private Long id_student;
-    private String new_value;
-    private String old_value;
+    private String message;
     private Date date;
     private Boolean viewed;
 }

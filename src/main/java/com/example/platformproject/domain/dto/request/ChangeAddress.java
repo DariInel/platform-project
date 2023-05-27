@@ -9,7 +9,7 @@ import java.sql.Date;
 @Setter
 public class ChangeAddress {
     Long id_student;
-    String old_address;
-    String new_address;
+    String message;
+    String new_value;
     Date date;
 }
